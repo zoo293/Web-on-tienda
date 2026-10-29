@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cyberpunk 2077 · GAMEVERSE</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="page" data-page="catalogo">
+  <div class="wrap">
+    <a class="back" href="catalogo.html">← Volver al catálogo</a>
+    <div class="detail">
+      <div class="slider" id="slider">
+        <div class="slide active"><img src="img/cyberpunck.img1.jpg" alt="Cyberpunk 2077 imagen 1"></div>
+        <div class="slide"><img src="img/cyberpunck.img2.jpeg" alt="Cyberpunk 2077 imagen 2"></div>
+        <div class="slide"><img src="img/cyberpunck.img3.avif" alt="Cyberpunk 2077 imagen 3"></div>
+        <button class="nav-btn prev" aria-label="Anterior">‹</button>
+        <button class="nav-btn next" aria-label="Siguiente">›</button>
+        <div class="dots"><i></i><i></i><i></i></div>
+      </div>
+      <div class="info">
+        <span class="eyebrow">Información del juego</span>
+        <h1>Cyberpunk 2077</h1>
+        <div class="price">S/ 125.00</div>
+        <div class="texto">
+<p><strong>Cyberpunk 2077</strong> es un videojuego de rol y acción en mundo abierto desarrollado por CD Projekt Red.</p>
+ <p>Está ambientado en un futuro distópico, en el año 2077, en una megaciudad llamada Night City.</p>
+ <h3>Trama principal</h3>
+ <p>El jugador toma el control de V, un mercenario que puede personalizarse en cuanto a género, apariencia, habilidades y trasfondo.</p>
+ <p>La historia gira en torno a una misión fallida que lleva a V a tener implantado un chip con la conciencia de Johnny Silverhand.</p>
+ <p>El objetivo es separarse de Johnny sin morir en el proceso.</p>
+ <h3>Características</h3>
+ <ul>
+ <li><strong>Mundo abierto:</strong> Explora libremente Night City.</li>
+ <li><strong>Estilo RPG:</strong> Decisiones que afectan la historia y el final.</li>
+ <li><strong>Combate y sigilo:</strong> Enfrenta desafíos a tu manera.</li>
+ <li><strong>Implantes:</strong> Mejora tus habilidades físicas y tecnológicas.</li>
+ <li><strong>Temas adultos:</strong> Identidad, moralidad y rebelión.</li>
+ </ul>
+        </div>
+        <div class="cta">
+          <button class="btn btn-primary" data-add data-id="1" data-titulo="cyberpunck" data-precio="125" data-img="img/cyber.webp">Agregar al carrito</button>
+          <a class="btn btn-ghost" href="catalogo.html?carrito=1">Ver carrito</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="shared.js"></script>
+<script>
+(function(){
+  var sl = document.querySelectorAll('#slider .slide'), dots = document.querySelectorAll('#slider .dots i'), i = 0, t;
+  function ir(n){ i = (n + sl.length) % sl.length; sl.forEach(function(s,k){ s.classList.toggle('active', k===i); }); dots.forEach(function(d,k){ d.classList.toggle('active', k===i); }); }
+  function auto(){ clearInterval(t); t = setInterval(function(){ ir(i+1); }, 4500); }
+  document.querySelector('#slider .prev').onclick = function(){ ir(i-1); auto(); };
+  document.querySelector('#slider .next').onclick = function(){ ir(i+1); auto(); };
+  dots.forEach(function(d,k){ d.onclick = function(){ ir(k); auto(); }; });
+  ir(0); auto();
+})();
+</script>
+</body>
+</html>

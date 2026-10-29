@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Gran Aventura Lego · GAMEVERSE</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="page" data-page="catalogo">
+  <div class="wrap">
+    <a class="back" href="catalogo.html">← Volver al catálogo</a>
+    <div class="detail">
+      <div class="slider" id="slider">
+        <div class="slide active"><img src="img/lego.img1.jpg" alt="La Gran Aventura Lego imagen 1"></div>
+        <div class="slide"><img src="img/lego.img2.jpg" alt="La Gran Aventura Lego imagen 2"></div>
+        <div class="slide"><img src="img/lego.img3.jpg" alt="La Gran Aventura Lego imagen 3"></div>
+        <button class="nav-btn prev" aria-label="Anterior">‹</button>
+        <button class="nav-btn next" aria-label="Siguiente">›</button>
+        <div class="dots"><i></i><i></i><i></i></div>
+      </div>
+      <div class="info">
+        <span class="eyebrow">Información del juego</span>
+        <h1>La Gran Aventura Lego</h1>
+        <div class="price">S/ 139.00</div>
+        <div class="texto">
+<p><strong>La Gran Aventura Lego</strong> el videojuego (La LEGO película: el videojuego en España) es un videojuego perteneciente al género de acción-aventura desarrollado por 
+ TT Games, como parte de la serie de los videojuegos Lego. De ello se sigue la trama de la película de animación La gran aventura LEGO.</p>
+ <p> El juego fue lanzado por Warner Bros. Interactive Entertainment junto a la película en 2014 para Microsoft Windows, Nintendo 3DS, PlayStation 3, PlayStation 4, PlayStation Vita,
+ Wii U, Xbox 360 y Xbox One. Más adelante, la compañía inglesa Feral Interactive publicó un port del juego para macOS en octubre de 2014.[1]​</p>
+ <h3>Jugabilidad</h3>
+ <p>EContinuando con la tendencia de la jugabilidad de los títulos anteriores de Lego por TT Games, el juego pone a los jugadores en el control de varios personajes de la película,
+ haciendo uso de piezas de Lego para hacer su camino a través de varios niveles. Por primera vez en la serie, los ambientes están completamente hechas de piezas de Lego. 
+ El juego introduce dos principales nuevos tipos de caracteres: Constructores regulares (como Emmet en niveles anteriores) y Master Builders (como Batman, Benny, Princesa 
+ Uni-Kitty, Vitruvius, y Wyldstyle). Constructores regulares son incapaces de construir normalmente objetos de montones de piezas de Lego y en lugar de requerir las páginas 
+ de instrucciones que se encuentran a lo largo de cada nivel para los personajes de los trabajadores de la construcción para su uso.</p>
+        </div>
+        <div class="cta">
+          <button class="btn btn-primary" data-add data-id="5" data-titulo="lego" data-precio="139" data-img="img/lego.webp">Agregar al carrito</button>
+          <a class="btn btn-ghost" href="catalogo.html?carrito=1">Ver carrito</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="shared.js"></script>
+<script>
+(function(){
+  var sl = document.querySelectorAll('#slider .slide'), dots = document.querySelectorAll('#slider .dots i'), i = 0, t;
+  function ir(n){ i = (n + sl.length) % sl.length; sl.forEach(function(s,k){ s.classList.toggle('active', k===i); }); dots.forEach(function(d,k){ d.classList.toggle('active', k===i); }); }
+  function auto(){ clearInterval(t); t = setInterval(function(){ ir(i+1); }, 4500); }
+  document.querySelector('#slider .prev').onclick = function(){ ir(i-1); auto(); };
+  document.querySelector('#slider .next').onclick = function(){ ir(i+1); auto(); };
+  dots.forEach(function(d,k){ d.onclick = function(){ ir(k); auto(); }; });
+  ir(0); auto();
+})();
+</script>
+</body>
+</html>

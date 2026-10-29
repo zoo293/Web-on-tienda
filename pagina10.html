@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FC 25 (EA Sports FC 25) · GAMEVERSE</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="page" data-page="catalogo">
+  <div class="wrap">
+    <a class="back" href="catalogo.html">← Volver al catálogo</a>
+    <div class="detail">
+      <div class="slider" id="slider">
+        <div class="slide active"><img src="img/fifa.img1.avif" alt="FC 25 (EA Sports FC 25) imagen 1"></div>
+        <div class="slide"><img src="img/fifa.img2.avif" alt="FC 25 (EA Sports FC 25) imagen 2"></div>
+        <div class="slide"><img src="img/fifa.img3.jpeg" alt="FC 25 (EA Sports FC 25) imagen 3"></div>
+        <button class="nav-btn prev" aria-label="Anterior">‹</button>
+        <button class="nav-btn next" aria-label="Siguiente">›</button>
+        <div class="dots"><i></i><i></i><i></i></div>
+      </div>
+      <div class="info">
+        <span class="eyebrow">Información del juego</span>
+        <h1>FC 25 (EA Sports FC 25)</h1>
+        <div class="price">S/ 221.00</div>
+        <div class="texto">
+<p><strong>FC 25 (EA Sports FC 25)</strong> es un juego de simulación de fútbol desarrollado por EA Sports. Es la continuación de la serie de juegos de fútbol de EA Sports,
+ que anteriormente se conocía como FIFA.</p>
+ <h3>Novedades:</h3>
+ <p>Mejoras en la jugabilidad: El juego incluye mejoras en la jugabilidad, como un nuevo sistema de control de los jugadores y una mayor variedad de movimientos y habilidades.</p>
+ <p>Nuevas características: El juego puede incluir nuevas características, como un nuevo modo de juego o una mayor personalización de los jugadores y equipos.</p>
+ <p>En resumen, FC 25 es un juego de simulación de fútbol que ofrece una experiencia realista y emocionante para los fanáticos del deporte. Con sus gráficos de alta calidad,
+ física realista y variedad de modos de juego, es una excelente opción para aquellos que buscan un juego de fútbol auténtico.</p>
+ <h3>Características</h3>
+ <ul>
+ <li><strong>Modo de juego:</strong> El juego cuenta con diferentes modos de juego, como Ultimate Team, Carrera y Kick-Off, que permiten a los jugadores crear
+ y personalizar sus equipos y jugadores.</li>
+ <li><strong>Gráficos y física </strong> El juego tiene gráficos de alta calidad y una física realista que simula el comportamiento de los jugadores y el balón en el campo.</li>
+ <li><strong>Jugadores y equipos:</strong> El juego cuenta con una gran cantidad de jugadores y equipos reales, incluyendo ligas y competiciones internacionales.</li>
+ <li><strong>Modo en línea: </strong> El juego permite a los jugadores competir en línea con otros jugadores de todo el mundo.</li>
+ 
+ </ul>
+        </div>
+        <div class="cta">
+          <button class="btn btn-primary" data-add data-id="10" data-titulo="fc25" data-precio="221" data-img="img/fc.webp">Agregar al carrito</button>
+          <a class="btn btn-ghost" href="catalogo.html?carrito=1">Ver carrito</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="shared.js"></script>
+<script>
+(function(){
+  var sl = document.querySelectorAll('#slider .slide'), dots = document.querySelectorAll('#slider .dots i'), i = 0, t;
+  function ir(n){ i = (n + sl.length) % sl.length; sl.forEach(function(s,k){ s.classList.toggle('active', k===i); }); dots.forEach(function(d,k){ d.classList.toggle('active', k===i); }); }
+  function auto(){ clearInterval(t); t = setInterval(function(){ ir(i+1); }, 4500); }
+  document.querySelector('#slider .prev').onclick = function(){ ir(i-1); auto(); };
+  document.querySelector('#slider .next').onclick = function(){ ir(i+1); auto(); };
+  dots.forEach(function(d,k){ d.onclick = function(){ ir(k); auto(); }; });
+  ir(0); auto();
+})();
+</script>
+</body>
+</html>

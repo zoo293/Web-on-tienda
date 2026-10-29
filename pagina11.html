@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>street fighter · GAMEVERSE</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="page" data-page="catalogo">
+  <div class="wrap">
+    <a class="back" href="catalogo.html">← Volver al catálogo</a>
+    <div class="detail">
+      <div class="slider" id="slider">
+        <div class="slide active"><img src="img/pelea.img1.jpeg" alt="street fighter imagen 1"></div>
+        <div class="slide"><img src="img/pelea.img2.jpeg" alt="street fighter imagen 2"></div>
+        <div class="slide"><img src="img/pelea.img3.avif" alt="street fighter imagen 3"></div>
+        <button class="nav-btn prev" aria-label="Anterior">‹</button>
+        <button class="nav-btn next" aria-label="Siguiente">›</button>
+        <div class="dots"><i></i><i></i><i></i></div>
+      </div>
+      <div class="info">
+        <span class="eyebrow">Información del juego</span>
+        <h1>street fighter</h1>
+        <div class="price">S/ 155.00</div>
+        <div class="texto">
+<p><strong>street fighter</strong> es la última entrega de la icónica saga de juegos de lucha desarrollada por Capcom. Lanzado el 2 de junio de 2023 para PlayStation 4, PlayStation 5,
+ Xbox Series X/S y PC, el juego ha sido aclamado por su innovación, accesibilidad y profundidad tanto para jugadores nuevos como veteranos.</p>
+ <h3> Modos de juego</h3>
+ <p>Fighting Ground: el núcleo clásico de combates 1 contra 1, incluyendo modos arcade, versus, entrenamiento y partidas en línea.</p>
+ <p>World Tour: una campaña para un jugador donde puedes crear y personalizar tu propio luchador, explorar ciudades como Metro City y aprender técnicas de personajes emblemáticos como 
+ Chun-Li y Ryu.</p>
+ <p>Battle Hub: un espacio social en línea donde los jugadores pueden interactuar, competir en torneos y acceder a contenido adicional.</p>
+ <h3>Jugabilidad y controles</h3>
+ <ul>
+ <li>Clásico: el tradicional de seis botones para jugadores experimentados.</li>
+ <li>Moderno: simplificado, ideal para principiantes, asignando movimientos especiales a combinaciones más sencillas. </li>
+ 
+ </ul>
+        </div>
+        <div class="cta">
+          <button class="btn btn-primary" data-add data-id="11" data-titulo="street fighter" data-precio="155" data-img="img/peleitas.webp">Agregar al carrito</button>
+          <a class="btn btn-ghost" href="catalogo.html?carrito=1">Ver carrito</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="shared.js"></script>
+<script>
+(function(){
+  var sl = document.querySelectorAll('#slider .slide'), dots = document.querySelectorAll('#slider .dots i'), i = 0, t;
+  function ir(n){ i = (n + sl.length) % sl.length; sl.forEach(function(s,k){ s.classList.toggle('active', k===i); }); dots.forEach(function(d,k){ d.classList.toggle('active', k===i); }); }
+  function auto(){ clearInterval(t); t = setInterval(function(){ ir(i+1); }, 4500); }
+  document.querySelector('#slider .prev').onclick = function(){ ir(i-1); auto(); };
+  document.querySelector('#slider .next').onclick = function(){ ir(i+1); auto(); };
+  dots.forEach(function(d,k){ d.onclick = function(){ ir(k); auto(); }; });
+  ir(0); auto();
+})();
+</script>
+</body>
+</html>

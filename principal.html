@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Principal · GAMEVERSE</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="page" data-page="principal">
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Hola, <span id="saludo">gamer</span></span>
+        <h1>Bienvenido a <span>GAMEVERSE</span></h1>
+        <p>Encuentra tus videojuegos favoritos, revisa su información y arma tu carrito en un solo lugar.</p>
+        <div class="cta"><a class="btn btn-primary" href="catalogo.html">Ver catálogo</a><a class="btn btn-ghost" href="lista.html">Lista de precios</a></div>
+      </div>
+      <img src="img/foto.img10.png" alt="GAMEVERSE">
+    </section>
+
+    <div class="stats">
+      <div class="stat"><b>12</b><span>Videojuegos disponibles</span></div>
+      <div class="stat"><b>1 clic</b><span>Para agregar al carrito</span></div>
+      <div class="stat"><b>Boleta</b><span>Al terminar tu compra</span></div>
+    </div>
+
+    <h2 class="section-title">Juegos destacados <a href="catalogo.html">Ver todos →</a></h2>
+    <div class="grid">
+      <a class="card" href="cyberpunck.html"><div class="thumb"><img src="img/cyber.webp" alt=""></div><div class="body"><h3>cyberpunck</h3><span class="price">S/ 125.00</span></div></a>
+      <a class="card" href="pagina3.html"><div class="thumb"><img src="img/rag.webp" alt=""></div><div class="body"><h3>god of war</h3><span class="price">S/ 400.00</span></div></a>
+      <a class="card" href="pagina8.html"><div class="thumb"><img src="img/spidermen.webp" alt=""></div><div class="body"><h3>spider-man 2</h3><span class="price">S/ 377.00</span></div></a>
+      <a class="card" href="pagina12.html"><div class="thumb"><img src="img/minecrfat.webp" alt=""></div><div class="body"><h3>minecraft</h3><span class="price">S/ 121.76</span></div></a>
+    </div>
+  </div>
+<script src="shared.js"></script>
+<script>var s = sesion(); if (s) document.getElementById('saludo').textContent = s.nombre.split(' ')[0];</script>
+</body>
+</html>

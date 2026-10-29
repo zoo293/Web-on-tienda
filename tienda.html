@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GAMEVERSE · Tienda</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="shell">
+  <header class="topbar"><button id="burger" aria-label="Abrir menú">☰</button><b>GAMEVERSE</b></header>
+  <div class="scrim" id="scrim"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><img src="img/sonic.webp" alt=""><div><b>GAMEVERSE</b><small>Tienda de videojuegos</small></div></div>
+    <div class="nav-label">Menú</div>
+    <nav class="nav">
+      <a href="principal.html" target="contenido" data-page="principal"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg>Principal</a>
+      <a href="catalogo.html" target="contenido" data-page="catalogo"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg>Catálogo</a>
+      <a href="catalogo.html?carrito=1" id="link-carrito"><svg viewBox="0 0 24 24"><path d="M3 4h2.5l2.2 11h10.6l2-8H6.4"/><circle cx="9" cy="19.5" r="1.4"/><circle cx="17" cy="19.5" r="1.4"/></svg>Carrito<span class="badge" id="badge">0</span></a>
+      <a href="lista.html" target="contenido" data-page="lista"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="18" r="1"/></svg>Lista de productos</a>
+      <a href="creditos.html" target="contenido" data-page="creditos"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17.5" cy="9" r="2.5"/><path d="M18 14.5c2 .3 3.3 1.8 3.7 4.5"/></svg>Créditos</a>
+    </nav>
+    <div class="user-box">
+      <div class="avatar" id="avatar">U</div>
+      <div class="who"><b id="u-nombre">Usuario</b><span id="u-email"></span></div>
+      <button class="logout" id="logout" title="Cerrar sesión" aria-label="Cerrar sesión"><svg viewBox="0 0 24 24"><path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4M16 8l4 4-4 4M20 12H9"/></svg></button>
+    </div>
+  </aside>
+
+  <main class="content"><iframe name="contenido" id="contenido" src="principal.html" title="Contenido"></iframe></main>
+
+<script src="auth.js"></script>
+<script>
+(function(){
+  var s = Auth.current();
+  if (!s) { location.replace('index.html'); return; }
+  var $ = function(id){ return document.getElementById(id); };
+  $('u-nombre').textContent = s.nombre;
+  $('u-email').textContent = s.email;
+  $('avatar').textContent = s.nombre.trim().charAt(0).toUpperCase();
+
+  var frame = $('contenido');
+  function menu(abrir){ document.body.classList.toggle('menu-open', abrir); }
+  $('burger').onclick = function(){ menu(true); };
+  $('scrim').onclick = function(){ menu(false); };
+
+  function activar(page){
+    document.querySelectorAll('.nav a[data-page]').forEach(function(a){ a.classList.toggle('active', a.dataset.page === page); });
+  }
+  document.querySelectorAll('.nav a[data-page]').forEach(function(a){
+    a.addEventListener('click', function(){ activar(a.dataset.page); menu(false); });
+  });
+  $('link-carrito').addEventListener('click', function(e){
+    e.preventDefault(); menu(false);
+    frame.src = 'catalogo.html?carrito=1&t=' + Date.now();
+  });
+
+  function badge(n){ var b = $('badge'); b.textContent = n; b.classList.toggle('show', n > 0); }
+  try {
+    var c = JSON.parse(localStorage.getItem('gv_cart')) || [];
+    badge(c.reduce(function(a,x){ return a + x.cant; }, 0));
+  } catch(e) {}
+
+  window.addEventListener('message', function(e){
+    var d = e.data;
+    if (!d || !d.gv) return;
+    if (d.type === 'cart') badge(d.count);
+    if (d.type === 'page') activar(d.page);
+  });
+
+  $('logout').onclick = function(){ Auth.logout(); location.href = 'index.html'; };
+})();
+</script>
+</body>
+</html>

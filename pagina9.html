@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mortal Kombat · GAMEVERSE</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="page" data-page="catalogo">
+  <div class="wrap">
+    <a class="back" href="catalogo.html">← Volver al catálogo</a>
+    <div class="detail">
+      <div class="slider" id="slider">
+        <div class="slide active"><img src="img/mortal.img1.jpg" alt="Mortal Kombat imagen 1"></div>
+        <div class="slide"><img src="img/mortal.img2.webp" alt="Mortal Kombat imagen 2"></div>
+        <div class="slide"><img src="img/mortal.img3.jpg" alt="Mortal Kombat imagen 3"></div>
+        <button class="nav-btn prev" aria-label="Anterior">‹</button>
+        <button class="nav-btn next" aria-label="Siguiente">›</button>
+        <div class="dots"><i></i><i></i><i></i></div>
+      </div>
+      <div class="info">
+        <span class="eyebrow">Información del juego</span>
+        <h1>Mortal Kombat</h1>
+        <div class="price">S/ 99.00</div>
+        <div class="texto">
+<p><strong>mortal kombat</strong> es una franquicia de videojuegos de lucha uno contra uno creada por Ed Boon y John Tobias en 1992. </p>
+ <p>Las cuatro primeras entregas fueron distribuidas por Midway Games y lanzadas principalmente en máquinas arcade; posteriormente estuvieron disponibles en consolas domésticas.</p>
+ <p>Los títulos de arcade fueron comprados más tarde por Acclaim Entertainment para las consolas caseras de esa época. La franquicia fue adquirida por Warner Bros en julio de 2009 y
+ se convirtió en una parte de la Warner Bros. Interactive Entertainment. El título más reciente es Mortal Kombat: Onslaught, publicado en octubre de 2023.</p>
+ <p>Como resultado de su éxito, Mortal Kombat ha dado lugar a varias secuelas y se ha escindido en varios juegos de acción y aventura, ha tenido películas, series de televisión e 
+ historietas. La serie es conocida por su violencia gráfica, incluyendo particularmente los fatalities, un movimiento especial que para ser realizado requiere hacer una combinación
+ específica de botones, que posteriormente llevó a las empresas de videojuegos a crear la ESRB.[2]​[3]​</p>
+         </div>
+        <div class="cta">
+          <button class="btn btn-primary" data-add data-id="9" data-titulo="mortal kombat" data-precio="99" data-img="img/motal.webp">Agregar al carrito</button>
+          <a class="btn btn-ghost" href="catalogo.html?carrito=1">Ver carrito</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="shared.js"></script>
+<script>
+(function(){
+  var sl = document.querySelectorAll('#slider .slide'), dots = document.querySelectorAll('#slider .dots i'), i = 0, t;
+  function ir(n){ i = (n + sl.length) % sl.length; sl.forEach(function(s,k){ s.classList.toggle('active', k===i); }); dots.forEach(function(d,k){ d.classList.toggle('active', k===i); }); }
+  function auto(){ clearInterval(t); t = setInterval(function(){ ir(i+1); }, 4500); }
+  document.querySelector('#slider .prev').onclick = function(){ ir(i-1); auto(); };
+  document.querySelector('#slider .next').onclick = function(){ ir(i+1); auto(); };
+  dots.forEach(function(d,k){ d.onclick = function(){ ir(k); auto(); }; });
+  ir(0); auto();
+})();
+</script>
+</body>
+</html>

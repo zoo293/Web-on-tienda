@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Astro Bot · GAMEVERSE</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="page" data-page="catalogo">
+  <div class="wrap">
+    <a class="back" href="catalogo.html">← Volver al catálogo</a>
+    <div class="detail">
+      <div class="slider" id="slider">
+        <div class="slide active"><img src="img/astrobot.img1.jpg" alt="Astro Bot imagen 1"></div>
+        <div class="slide"><img src="img/astrobot.img2.jpg" alt="Astro Bot imagen 2"></div>
+        <div class="slide"><img src="img/astrobot.img3.jpg" alt="Astro Bot imagen 3"></div>
+        <button class="nav-btn prev" aria-label="Anterior">‹</button>
+        <button class="nav-btn next" aria-label="Siguiente">›</button>
+        <div class="dots"><i></i><i></i><i></i></div>
+      </div>
+      <div class="info">
+        <span class="eyebrow">Información del juego</span>
+        <h1>Astro Bot</h1>
+        <div class="price">S/ 206.00</div>
+        <div class="texto">
+<p><strong>astro bot</strong> es un juego de plataformas y acción desarrollado por Team17 y lanzado para PlayStation 5. El juego sigue las aventuras de un pequeño robot 
+ llamado Astro, que debe explorar diferentes planetas y lunas para rescatar a sus amigos y restaurar el orden en el universo.</p>
+ <h3>Estilo visual y sonido:</h3>
+ <p>Gráficos: El juego cuenta con gráficos coloridos y detallados, que aprovechan al máximo las capacidades de la PlayStation 5.</p>
+ <p>Música: La banda sonora del juego es animada y emocionante, y se adapta perfectamente al ritmo y la acción del juego.</p>
+ <h3>Características</h3>
+ <ul>
+ <li><strong>Exploracion:</strong> Astro puede explorar diferentes planetas y lunas, cada uno con su propio entorno y desafíos.</li>
+ <li><strong>Plataformas:</strong> El juego cuenta con mecánicas de plataformas precisas y desafiantes, que requieren habilidad y estrategia para superar obstáculos y enemigos.</li>
+ <li><strong>Habilidades:</strong> Astro puede adquirir diferentes habilidades y herramientas a medida que avanza en el juego, lo que le permite acceder a nuevas áreas y superar desafíos.</li>
+ <li><strong>Combate:</strong> Astro también puede luchar contra enemigos y jefes, utilizando sus habilidades y herramientas para derrotarlos.</li>
+ 
+ </ul>
+        </div>
+        <div class="cta">
+          <button class="btn btn-primary" data-add data-id="4" data-titulo="Astro bot" data-precio="206" data-img="img/astrobot.webp">Agregar al carrito</button>
+          <a class="btn btn-ghost" href="catalogo.html?carrito=1">Ver carrito</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="shared.js"></script>
+<script>
+(function(){
+  var sl = document.querySelectorAll('#slider .slide'), dots = document.querySelectorAll('#slider .dots i'), i = 0, t;
+  function ir(n){ i = (n + sl.length) % sl.length; sl.forEach(function(s,k){ s.classList.toggle('active', k===i); }); dots.forEach(function(d,k){ d.classList.toggle('active', k===i); }); }
+  function auto(){ clearInterval(t); t = setInterval(function(){ ir(i+1); }, 4500); }
+  document.querySelector('#slider .prev').onclick = function(){ ir(i-1); auto(); };
+  document.querySelector('#slider .next').onclick = function(){ ir(i+1); auto(); };
+  dots.forEach(function(d,k){ d.onclick = function(){ ir(k); auto(); }; });
+  ir(0); auto();
+})();
+</script>
+</body>
+</html>

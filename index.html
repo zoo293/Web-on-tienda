@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GAMEVERSE · Ingresar</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="auth">
+  <section class="auth-hero">
+    <img src="img/foto.img10.png" alt="GAMEVERSE">
+    <h2>Tu tienda de videojuegos favorita</h2>
+    <p>Crea tu cuenta, explora el catálogo y compra tus juegos en segundos.</p>
+    <div class="pills"><span class="pill">12 videojuegos</span><span class="pill">Carrito de compras</span><span class="pill">Boleta al instante</span></div>
+  </section>
+
+  <section class="auth-side">
+    <div class="auth-card">
+      <div class="auth-brand"><img src="img/sonic.webp" alt=""><b>GAMEVERSE</b></div>
+
+      <div class="tabs">
+        <button type="button" id="tab-login">Iniciar sesión</button>
+        <button type="button" id="tab-registro">Crear cuenta</button>
+      </div>
+
+      <!-- Iniciar sesión -->
+      <form class="auth-form" id="form-login" novalidate>
+        <h1>Bienvenido de nuevo</h1>
+        <p class="sub">Ingresa con tu correo y contraseña.</p>
+        <div class="msg" id="msg-login"></div>
+        <div class="field"><label for="l-email">Correo electrónico</label>
+          <input type="email" id="l-email" placeholder="tucorreo@ejemplo.com" autocomplete="email"></div>
+        <div class="field"><label for="l-pass">Contraseña</label>
+          <div class="input-wrap"><input type="password" id="l-pass" placeholder="Tu contraseña" autocomplete="current-password">
+          <button type="button" class="toggle-pass" data-for="l-pass">Mostrar</button></div></div>
+        <button class="btn btn-primary btn-block" type="submit">Entrar a la tienda</button>
+        <p class="auth-foot">¿Aún no tienes cuenta? <a id="ir-registro">Regístrate</a></p>
+      </form>
+
+      <!-- Registro -->
+      <form class="auth-form" id="form-registro" novalidate>
+        <h1>Crea tu cuenta</h1>
+        <p class="sub">Solo te tomará un minuto.</p>
+        <div class="msg" id="msg-registro"></div>
+        <div class="field"><label for="r-nombre">Nombre completo</label>
+          <input type="text" id="r-nombre" placeholder="Ej. Juan Pérez" autocomplete="name"></div>
+        <div class="field"><label for="r-email">Correo electrónico</label>
+          <input type="email" id="r-email" placeholder="tucorreo@ejemplo.com" autocomplete="email"></div>
+        <div class="field"><label for="r-pass">Contraseña</label>
+          <div class="input-wrap"><input type="password" id="r-pass" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+          <button type="button" class="toggle-pass" data-for="r-pass">Mostrar</button></div></div>
+        <div class="field"><label for="r-pass2">Repetir contraseña</label>
+          <div class="input-wrap"><input type="password" id="r-pass2" placeholder="Repite la contraseña" autocomplete="new-password">
+          <button type="button" class="toggle-pass" data-for="r-pass2">Mostrar</button></div></div>
+        <button class="btn btn-primary btn-block" type="submit">Crear mi cuenta</button>
+        <p class="auth-foot">¿Ya tienes cuenta? <a id="ir-login">Inicia sesión</a></p>
+      </form>
+    </div>
+  </section>
+
+<script src="auth.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  if (Auth.current()) { location.replace('tienda.html'); return; }
+
+  function mostrar(cual){
+    var login = cual === 'login';
+    $('tab-login').classList.toggle('active', login);
+    $('tab-registro').classList.toggle('active', !login);
+    $('form-login').classList.toggle('active', login);
+    $('form-registro').classList.toggle('active', !login);
+  }
+  function msg(id, tipo, texto){
+    var m = $(id); m.className = 'msg ' + tipo + ' show'; m.textContent = texto;
+  }
+  function limpiar(id){ $(id).className = 'msg'; }
+
+  $('tab-login').onclick = $('ir-login').onclick = function(){ mostrar('login'); };
+  $('tab-registro').onclick = $('ir-registro').onclick = function(){ mostrar('registro'); };
+  document.querySelectorAll('.toggle-pass').forEach(function(b){
+    b.onclick = function(){
+      var i = $(b.dataset.for), ver = i.type === 'password';
+      i.type = ver ? 'text' : 'password'; b.textContent = ver ? 'Ocultar' : 'Mostrar';
+    };
+  });
+
+  // Si todavía no hay cuentas, se empieza por el registro
+  mostrar(Auth.users().length ? 'login' : 'registro');
+  if (!Auth.disponible()) msg('msg-login','error','Tu navegador no permite guardar datos. Activa el almacenamiento local para poder crear tu cuenta.');
+
+  $('form-registro').addEventListener('submit', function(e){
+    e.preventDefault(); limpiar('msg-registro');
+    var nombre = $('r-nombre').value.trim(), email = $('r-email').value.trim(),
+        p1 = $('r-pass').value, p2 = $('r-pass2').value;
+    if (nombre.length < 2) return msg('msg-registro','error','Escribe tu nombre completo.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return msg('msg-registro','error','Escribe un correo válido.');
+    if (p1.length < 6) return msg('msg-registro','error','La contraseña debe tener al menos 6 caracteres.');
+    if (p1 !== p2) return msg('msg-registro','error','Las contraseñas no coinciden.');
+    var r = Auth.register(nombre, email, p1);
+    if (!r.ok) return msg('msg-registro','error', r.error);
+    // Cuenta creada: ahora sí puede iniciar sesión
+    $('form-registro').reset();
+    mostrar('login');
+    $('l-email').value = email; $('l-pass').value = '';
+    msg('msg-login','ok','¡Cuenta creada con éxito! Ahora inicia sesión para entrar.');
+    $('l-pass').focus();
+  });
+
+  $('form-login').addEventListener('submit', function(e){
+    e.preventDefault(); limpiar('msg-login');
+    var email = $('l-email').value.trim(), pass = $('l-pass').value;
+    if (!email || !pass) return msg('msg-login','error','Completa tu correo y contraseña.');
+    var r = Auth.login(email, pass);
+    if (!r.ok) return msg('msg-login','error', r.error);
+    location.href = 'tienda.html';
+  });
+})();
+</script>
+</body>
+</html>

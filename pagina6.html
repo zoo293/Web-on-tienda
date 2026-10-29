@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>resident evil 4 · GAMEVERSE</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body class="page" data-page="catalogo">
+  <div class="wrap">
+    <a class="back" href="catalogo.html">← Volver al catálogo</a>
+    <div class="detail">
+      <div class="slider" id="slider">
+        <div class="slide active"><img src="img/evil.img1.png" alt="resident evil 4 imagen 1"></div>
+        <div class="slide"><img src="img/evil.img2.png" alt="resident evil 4 imagen 2"></div>
+        <div class="slide"><img src="img/evil.img3.png" alt="resident evil 4 imagen 3"></div>
+        <button class="nav-btn prev" aria-label="Anterior">‹</button>
+        <button class="nav-btn next" aria-label="Siguiente">›</button>
+        <div class="dots"><i></i><i></i><i></i></div>
+      </div>
+      <div class="info">
+        <span class="eyebrow">Información del juego</span>
+        <h1>resident evil 4</h1>
+        <div class="price">S/ 133.00</div>
+        <div class="texto">
+<p><strong>resident evil 4</strong> es un videojuego de acción y terror desarrollado por Capcom. Es una de las entregas más populares de la saga Resident Evil. 
+ Fue lanzado originalmente en 2005 y recibió un remake en 2023 con gráficos y jugabilidad actualizados.</p>
+ 
+ <h3>Trama principal</h3>
+ <p>El juego sigue a Leon S. Kennedy, un ex policía y agente del gobierno de EE. UU., que es enviado a un remoto pueblo en España para rescatar a Ashley Graham, la hija del presidente,
+ que ha sido secuestrada. Al llegar, Leon descubre que los aldeanos están infectados con un parásito llamado Las Plagas, que los vuelve violentos y controlables.
+ Detrás del secuestro está un culto llamado Los Iluminados, liderado por Osmund Saddler, quien planea usar a Ashley para propagar el parásito en Estados Unidos.
+ Leon debe enfrentarse a hordas de enemigos, resolver acertijos, rescatar a Ashley y desmantelar los planes del culto.</p>
+ <h3>Características</h3>
+ <ul>
+ <li>Mezcla de acción y horror con perspectiva en tercera persona.</li>
+ <li>Enemigos inteligentes y variados.</li>
+ <li>Sistema de mejoras de armas y gestión de inventario.</li>
+ <li>Jefes memorables y escenas cinematográficas intensas.</li>
+ 
+ </ul>
+        </div>
+        <div class="cta">
+          <button class="btn btn-primary" data-add data-id="6" data-titulo="resident evil 4" data-precio="133" data-img="img/residen.webp">Agregar al carrito</button>
+          <a class="btn btn-ghost" href="catalogo.html?carrito=1">Ver carrito</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="shared.js"></script>
+<script>
+(function(){
+  var sl = document.querySelectorAll('#slider .slide'), dots = document.querySelectorAll('#slider .dots i'), i = 0, t;
+  function ir(n){ i = (n + sl.length) % sl.length; sl.forEach(function(s,k){ s.classList.toggle('active', k===i); }); dots.forEach(function(d,k){ d.classList.toggle('active', k===i); }); }
+  function auto(){ clearInterval(t); t = setInterval(function(){ ir(i+1); }, 4500); }
+  document.querySelector('#slider .prev').onclick = function(){ ir(i-1); auto(); };
+  document.querySelector('#slider .next').onclick = function(){ ir(i+1); auto(); };
+  dots.forEach(function(d,k){ d.onclick = function(){ ir(k); auto(); }; });
+  ir(0); auto();
+})();
+</script>
+</body>
+</html>
